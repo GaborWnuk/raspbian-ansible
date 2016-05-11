@@ -1,0 +1,10 @@
+---
+- name: "Create group"
+  group: name={{ group }} state=present
+
+- name: "Create user"
+  user: name={{ user }} shell=/bin/bash groups={{ group }},sudo
+
+- name: "Add authorized_key"
+  authorized_key: user={{ user }} key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+

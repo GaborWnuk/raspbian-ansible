@@ -1,0 +1,12 @@
+---
+- name: "Create firewall directory"
+  file: path=/root/firewall state=directory mode=0700
+
+- name: "Copy firewall.sh"
+  copy: src=firewall.sh dest=/root/firewall/firewall.sh owner=root group=root mode=0700
+
+- name: "Download GeoIP database"
+  unarchive: src=http://geolite.maxmind.com/download/geoip/database/GeoIPCountryCSV.zip dest=/root/firewall/ copy=no
+
+- name: "Apply firewall.sh (may take some time, depending on how many countries You've blocked)"
+  shell: /root/firewall/firewall.sh chdir=/root/firewall

@@ -1,0 +1,16 @@
+---
+- name: "Use NOPASSWD pi sudo"
+  lineinfile: dest=/etc/sudoers regexp="^pi\s+ALL=\(ALL\)\s+NOPASSWD:\s+ALL" line="{{ user }} ALL=(ALL) NOPASSWD:ALL"
+
+- name: "Remove pi user"
+  user: name=pi state=absent remove=yes
+  become: yes
+  become_user: {{ user }}
+  sudo: yes
+
+- name: Disable password login
+  lineinfile: dest={{ sshd_config }} regexp="^#?PasswordAuthentication" line="PasswordAuthentication no"
+  become: yes
+  become_user: {{ user }}
+  sudo: yes
+  notify: restart sshd
