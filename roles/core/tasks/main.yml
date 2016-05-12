@@ -1,15 +1,15 @@
 ---
-#- name: "Update APT package cache"
-#  action: apt update_cache=yes
+- name: "Update APT package cache"
+  action: apt update_cache=yes
 
-#- name: "Upgrade APT to the lastest packages"
-#  action: apt upgrade=safe
+- name: "Upgrade APT to the lastest packages"
+  action: apt upgrade=safe
 
-#- name: "Set hostname to {{ hostname }}"
-#  hostname: name={{ hostname }}
+- name: "Set hostname to {{ hostname }}"
+  hostname: name={{ hostname }}
 
-#- name: "Fix /etc/hosts raspberrypi -> {{ hostname }}"
-#  lineinfile: dest=/etc/hosts regexp="^127.0.1.1" line="127.0.1.1 {{ hostname }}"
+- name: "Fix /etc/hosts raspberrypi -> {{ hostname }}"
+  lineinfile: dest=/etc/hosts regexp="^127.0.1.1" line="127.0.1.1 {{ hostname }}"
 
 - name: "Install unattended-upgrades"
   apt: name=unattended-upgrades state=present

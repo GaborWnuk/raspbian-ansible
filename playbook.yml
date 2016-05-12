@@ -6,8 +6,8 @@
      - core
      - createuser
      - securessh
-    # - firewall
-    # - nginx
+     - firewall
+     - nginx
     # Use only if You're sure You will finish provisioning
     # - securepi
   vars:
